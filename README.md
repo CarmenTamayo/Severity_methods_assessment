@@ -1,60 +1,60 @@
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# Severity\_methods\_assessment
+# Severity_methods_assessment
 
 <!-- badges: start -->
 
-[![License: GPL (&gt;=
+[![License: GPL (\>=
 2)](https://img.shields.io/badge/License-GPL%20%28%3E%3D%202%29-blue.svg)](https://choosealicense.com/licenses/gpl-2.0/)
 [![Dependencies](https://img.shields.io/badge/dependencies-2/95-green?style=flat)](#)
 <!-- badges: end -->
 
-Research Compendium of the project **{{ PLEASE ADD A FEW WORDS }}**
+### Aim of the study
 
-### How to cite
+To compare and assess methods to estimate CFR during an infectious
+disease outbreak, that could be easily adopted or incorporated into
+dashboards, while evaluating common assumptions for the different types
+of data available to the researcher. If adequate, these methods would
+maximise the speed and efficiency of analyses, compared to slower but
+more methodologically robust statistical inference.
 
-Please cite this compendium as:
+### Types of data
 
-> **{{ PLEASE ADD A CITATION }}**
+#### Individual-level data
 
-### Content
+If we have access to individual-level data, where we have data for each
+case’s time of disease onset and death, we don’t need to aggregate data
+into incidence , e.g., to use {cfr} functions, to obtain a reliable
+estimate of severity. The problem is that often, during an outbreak,
+complete data on cases’ onset and their outcomes won’t be available,
+given the high proportion of cases without a known outcome in the
+growing phase of an epidemic.
 
-This repository is structured as follow:
+##### *Case studies for individual-level data*
 
--   [`data/`](https://github.com/CarmenTamayo/Severity_methods_assessment/tree/master/data):
-    contains all raw data required to perform analyses
+1.  Linelist with known outcomes, assuming that onset-death delay
+    follows the same distribution as onset-recovery.
+2.  Truncated linelist with unknown delays
+3.  Recoveries are not recorded but deaths are (Cholera-like outbreak)
+4.  Delay-death shorter than delay-recovery (Ebola-like outbreak)
 
--   [`analyses/`](https://github.com/CarmenTamayo/Severity_methods_assessment/tree/main/analyses/):
-    contains R scripts to run each step of the workflow
+#### Aggregated data
 
--   [`outputs/`](https://github.com/CarmenTamayo/Severity_methods_assessment/tree/main/outputs):
-    contains all the results created during the workflow
+Currently, the methods to estimate the time-varying and the static CFR
+used by the {cfr} package rely on daily incidence and daily death data.
+In this case, we are either forced to go back to the naïve calculation
+of cases/deaths, or we can do some calculation to allocate weekly cases
+into the days of the week, sometimes this is done by adding all cases to
+the first day of the week. Imputation methods, such as the one from
+EpiEstim, are useful to reconstruct daily incidence of disease. In this
+section we assess in which scenarios it is possible to use this method
+to estimate disease severity, depending on the quality of data that is
+available to the researcher.
 
--   [`figures/`](https://github.com/CarmenTamayo/Severity_methods_assessment/tree/main/figures):
-    contains all the figures created during the workflow
+##### *Case studies for aggregated data*
 
--   [`R/`](https://github.com/CarmenTamayo/Severity_methods_assessment/tree/main/R):
-    contains R functions developed especially for this project
-
--   [`man/`](https://github.com/CarmenTamayo/Severity_methods_assessment/tree/main/man):
-    contains help files of R functions
-
--   [`DESCRIPTION`](https://github.com/CarmenTamayo/Severity_methods_assessment/tree/main/DESCRIPTION):
-    contains project metadata (author, date, dependencies, etc.)
-
--   [`make.R`](https://github.com/CarmenTamayo/Severity_methods_assessment/tree/main/make.R):
-    main R script to run the entire project by calling each R script
-    stored in the `analyses/` folder
-
-### Usage
-
-Clone the repository, open R/RStudio and run:
-
-    source("make.R")
-
-### Notes
-
--   All required packages, listed in the `DESCRIPTION` file, will be
-    installed (if necessary)
--   All required packages and R functions will be loaded
--   Some analyses listed in the `make.R` might take time
+1.  Weekly aggregation of cases and deaths
+2.  Weekly aggregation of cases and only total deaths
+3.  Incidence data with known delays: comparison of discrete vs
+    continuous distributions
