@@ -82,6 +82,7 @@ rt_ebola_growing <- lapply(incidence_ebola_trend, subset_outbreak_phase, from = 
 rt_ebola_decline <- lapply(incidence_ebola_trend, subset_outbreak_phase, from = "peak", to = "end")
 
 # 3rd list of dfs, with the cut-off point at the peak of the outbreak
+# Ideally this would be done with subset_outbreak_phase as well
 rt_ebola_peak <- incidence_ebola_trend
 for (i in seq_along(rt_ebola_peak)) {
   peak_index <- which(rt_ebola_peak[[i]]$outbreak_dates == "peak")
